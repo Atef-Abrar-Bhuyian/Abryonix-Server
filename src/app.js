@@ -5,6 +5,7 @@ const app = express();
 const cors = require("cors");
 const logger = require("./middleware/logger");
 const imageRouter = require("./routes/image.route");
+const userInsertDb = require("./controllers/user.controller");
 
 // middleware
 app.use(cors());
@@ -13,6 +14,7 @@ app.use(logger);
 
 // routes
 app.use("/api/v1/image", imageRouter);
+app.use("/create/profile", userInsertDb);
 
 // playground
 

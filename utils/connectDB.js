@@ -10,11 +10,12 @@ const client = new MongoClient(process.env.URI, {
   },
 });
 
-const db = client.db("Abryonix-server-db");
+const db = client.db("AbryonixDB");
 const imageCollection = db.collection("images");
+const usersCollection = db.collection("users");
 
 async function connectDB() {
   return client.connect();
 }
 
-module.exports = { connectDB, imageCollection };
+module.exports = { connectDB, imageCollection, usersCollection };
