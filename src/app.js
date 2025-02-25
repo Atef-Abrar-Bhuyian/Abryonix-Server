@@ -1,4 +1,5 @@
 // definition
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -8,6 +9,8 @@ const logger = require("./middleware/logger");
 app.use(cors());
 app.use(express.json());
 app.use(logger);
+
+
 
 // playground
 
