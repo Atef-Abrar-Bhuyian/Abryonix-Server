@@ -37,4 +37,17 @@ const insertAiImage = async (req, res) => {
   }
 };
 
-module.exports = insertAiImage;
+const getAllImage = async (req, res) => {
+  try {
+    const result = await imageCollection
+      .find()
+      .project({ _id: 1, photoURL: 1, displayName: 1, medium_image: 1 })
+      .toArray();
+    res.send(result);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+};
+
+module.exports = { insertAiImage, getAllImage };
