@@ -1,3 +1,4 @@
+const { ObjectId } = require("mongodb");
 const genrateImageUrl = require("../../utils/ai/generateImageURL");
 const getImageBuffer = require("../../utils/ai/getImageBuffer");
 const { imageCollection } = require("../../utils/connectDB");
@@ -23,7 +24,6 @@ const insertAiImage = async (req, res) => {
       photoURL,
       prompt,
       category,
-      createdAt: new Date().toISOString,
       thumb_iamge: data?.data?.thumb?.url,
       medium_image: data?.data?.medium?.url,
       original_image: data?.data?.url,
@@ -41,7 +41,13 @@ const getAllImage = async (req, res) => {
   try {
     const result = await imageCollection
       .find()
-      .project({ _id: 1, photoURL: 1, displayName: 1, medium_image: 1 })
+      .project({
+        _id: 1,
+        photoURL: 1,
+        displayName: 1,
+        medium_image: 1,
+        prompt: 1,
+      })
       .toArray();
     res.send(result);
   } catch (err) {
@@ -50,4 +56,25 @@ const getAllImage = async (req, res) => {
   }
 };
 
-module.exports = { insertAiImage, getAllImage };
+const getSingleImage = async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+
+    if (id.length != 24) {
+      res.status(400).send({
+        status: 400,
+        message: "Please Provide a Valid ID",
+      });
+      return;
+    }
+
+    const result = await imageCollection.findOne({ _id: new ObjectId(id) });
+    res.send(result);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+};
+
+module.exports = { insertAiImage, getAllImage, getSingleImage };
