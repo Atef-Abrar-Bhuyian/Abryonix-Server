@@ -13,9 +13,10 @@ const client = new MongoClient(process.env.URI, {
 const db = client.db("AbryonixDB");
 const imageCollection = db.collection("images");
 const usersCollection = db.collection("users");
+const commentCollection = db.collection("comments");
 
 async function connectDB() {
   return client.connect();
 }
 
-module.exports = { connectDB, imageCollection, usersCollection };
+module.exports = { connectDB, imageCollection, usersCollection,commentCollection };
