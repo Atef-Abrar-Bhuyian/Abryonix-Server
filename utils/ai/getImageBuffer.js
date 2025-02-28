@@ -2,7 +2,6 @@ require("dotenv").config();
 // Buffer generate
 const getImageBuffer = async (prompt, category) => {
   const finalPrompt = `imagine a ${category} : ${prompt}`;
-  console.log(finalPrompt);
 
   const form = new FormData();
   form.append("prompt", finalPrompt);

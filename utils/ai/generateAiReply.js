@@ -141,7 +141,6 @@ const generateAiReply = async (prompt, comment) => {
   const finalPrompt = `prompt: ${prompt}
     comment:${comment}`;
   let result = await chat.sendMessage(finalPrompt);
-  console.log(result.response.text());
   return result.response.text();
 };
 
