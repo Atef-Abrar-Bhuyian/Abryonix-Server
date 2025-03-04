@@ -56,6 +56,26 @@ const getAllImage = async (req, res) => {
   }
 };
 
+const getLimitedImage = async (req, res) => {
+  try {
+    const result = await imageCollection
+      .find()
+      .project({
+        _id: 1,
+        photoURL: 1,
+        displayName: 1,
+        medium_image: 1,
+        prompt: 1,
+      })
+      .limit(8)
+      .toArray();
+    res.send(result);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+};
+
 const getSingleImage = async (req, res) => {
   try {
     const { id } = req.params;
@@ -77,4 +97,4 @@ const getSingleImage = async (req, res) => {
   }
 };
 
-module.exports = { insertAiImage, getAllImage, getSingleImage };
+module.exports = { insertAiImage, getAllImage, getSingleImage,getLimitedImage };
