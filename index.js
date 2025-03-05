@@ -8,9 +8,9 @@ const port = process.env.port || 5000;
 connectDB()
   .then(() => {
     app.listen(port, () => {
-      console.log(`Abryonix Server is Running on : ${port}`);
+      // console.log(`Abryonix Server is Running on : ${port}`);
     });
   })
   .catch((err) => {
-    console.log(err);
+    // console.log(err);
   });

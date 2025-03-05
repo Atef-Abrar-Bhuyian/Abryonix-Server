@@ -12,6 +12,7 @@ const commentRouter = require("./routes/comment.route");
 app.use(cors());
 app.use(express.json());
 app.use(logger);
+app.use(express.urlencoded());
 
 // routes
 app.use("/api/v1/image", imageRouter);

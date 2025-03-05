@@ -32,7 +32,7 @@ const insertAiImage = async (req, res) => {
     const result = await imageCollection.insertOne(document);
     res.send({ ...result, url: document?.original_image });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(500).send(err);
   }
 };
@@ -51,7 +51,7 @@ const getAllImage = async (req, res) => {
       .toArray();
     res.send(result);
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(500).send(err);
   }
 };
@@ -71,7 +71,7 @@ const getLimitedImage = async (req, res) => {
       .toArray();
     res.send(result);
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(500).send(err);
   }
 };
@@ -91,7 +91,7 @@ const getSingleImage = async (req, res) => {
     const result = await imageCollection.findOne({ _id: new ObjectId(id) });
     res.send(result);
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(500).send(err);
   }
 };
@@ -121,7 +121,7 @@ const getSingleUserImage = async (req, res) => {
 
     res.send(result);
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(500).send(err);
   }
 };
