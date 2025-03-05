@@ -79,7 +79,6 @@ const getLimitedImage = async (req, res) => {
 const getSingleImage = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id);
 
     if (id.length != 24) {
       res.status(400).send({
@@ -97,4 +96,40 @@ const getSingleImage = async (req, res) => {
   }
 };
 
-module.exports = { insertAiImage, getAllImage, getSingleImage,getLimitedImage };
+const getSingleUserImage = async (req, res) => {
+  try {
+    const { email } = req.params;
+
+    if (!email) {
+      res.status(400).send({
+        status: 400,
+        message: "Please Provide a Valid Email",
+      });
+      return;
+    }
+
+    const result = await imageCollection.find({ email }).toArray();
+
+    // If no images are found, return a 404
+    if (result.length === 0) {
+      res.status(404).send({
+        status: 404,
+        message: "No images found for this user.",
+      });
+      return;
+    }
+
+    res.send(result);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+};
+
+module.exports = {
+  insertAiImage,
+  getAllImage,
+  getSingleImage,
+  getLimitedImage,
+  getSingleUserImage,
+};
